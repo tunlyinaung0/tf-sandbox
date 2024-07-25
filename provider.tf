@@ -9,7 +9,7 @@ terraform {
   backend "s3" {
     bucket = "tf-sandbox-assignment"
     key    = "terraform.tfstate"
-    region = local.region
+    region = "us-east-1"
   }
 }
 
