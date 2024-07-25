@@ -24,6 +24,10 @@ module "vpc" {
     Name = "${local.prefix}-nat-gw"
   }
 
+  igw_tags = {
+    Name = "${local.prefix}-igw"
+  }
+
   tags = {
     Name = "${local.prefix}-vpc"
   }
