@@ -29,58 +29,6 @@ module "vpc" {
   }
 }
 
-# resource "aws_eip" "for-nat" {
-#     domain = "vpc"
-# }
-
-# resource "aws_nat_gateway" "nat" {
-#     allocation_id = aws_eip.for-nat.id
-#     subnet_id = module.vpc.public_subnets[0]
-
-#     tags = {
-#         Name = "${local.prefix}-nat"
-#     }
-# }
-
-# resource "aws_route_table" "public_rtb" {
-#     vpc_id = module.vpc.vpc_id 
-
-#     route {
-#         cidr_block = "0.0.0.0/0"
-#         gateway_id = module.vpc.igw_id
-#     }
-
-#     tags = {
-#       Name = "${local.prefix}-public-rtb"
-#     }
-# }
-
-# resource "aws_route_table" "private_rtb" {
-#     vpc_id = module.vpc.vpc_id
-
-#     route {
-#         cidr_block = "0.0.0.0/0"
-#         gateway_id = aws_nat_gateway.nat.id
-#     }
-
-#     tags = {
-#         Name = "${local.prefix}-private-rtb"
-#     }
-# }
-
-# resource "aws_route_table_association" "public_rtb_association" {
-#     count = length(local.public_subnets)
-#     subnet_id = module.vpc.public_subnets[count.index]
-#     route_table_id = aws_route_table.public_rtb.id
-# }
-
-# resource "aws_route_table_association" "private_rtb_association" {
-#     count = length(local.private_subnets)
-#     subnet_id = module.vpc.private_subnets[count.index]
-#     route_table_id = aws_route_table.private_rtb.id
-# }
-
-
 resource "aws_security_group" "bastion-sg" {
   name   = "bastion-sg"
   vpc_id = module.vpc.vpc_id
